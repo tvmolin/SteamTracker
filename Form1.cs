@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using SteamTracker.dtos;
-
+using Microsoft.VisualBasic;
+using SteamTracker.components;
 
 //TODO: request for each game image upon load
-//TODO: Show total games
 //TODO: Auto resize grid when fullscreen
 //TODO: Validate if user input is between 0 and 10
 //TODO: Implement link click
@@ -29,6 +29,7 @@ namespace SteamTracker
             List<Game> gamesList = await refreshSteamData();
             gamesGrid.DataSource = gamesList.OrderByDescending(item => item.likelihoodToPlay).ToList();
             gamesGrid.AutoResizeColumns();
+            totalGamesLabel.Text = gamesGrid.RowCount.ToString();
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -126,7 +127,10 @@ namespace SteamTracker
             var gamesList = (List<Game>)gamesGrid.DataSource;
             Game game = gamesList.Find(item => item.name.ToLower().Contains(searchText));
             int row = gamesList.IndexOf(game);
-            gamesGrid.CurrentCell = gamesGrid.Rows[row].Cells[2];
+            if (row >= 0)
+            {
+                gamesGrid.CurrentCell = gamesGrid.Rows[row].Cells[2];
+            }
         }
 
         private void searchTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -135,6 +139,19 @@ namespace SteamTracker
             if (e.KeyChar == (char)13)
             {
                 searchForItem();
+            }
+        }
+
+        private void addNonSteamGame_Click(object sender, EventArgs e)
+        {
+            string gameName = Prompt.ShowDialog("Name of the game to be added:", "Add non-Steam Game");
+            if (gameName != null && gameName != "")
+            {
+                List<Game> games = (List<Game>) gamesGrid.DataSource;
+                games.Add(new Game(gameName));
+                gamesGrid.DataSource = games;
+                saveData();
+                refreshData();
             }
         }
     }

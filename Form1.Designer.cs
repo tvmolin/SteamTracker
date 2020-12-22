@@ -34,10 +34,6 @@ namespace SteamTracker
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.gamesGrid = new System.Windows.Forms.DataGridView();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.gamesListResponseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.appid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.icon = new System.Windows.Forms.DataGridViewImageColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +41,12 @@ namespace SteamTracker
             this.notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.latestUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.storePageLink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.addNonSteamGame = new System.Windows.Forms.Button();
+            this.gamesListResponseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.totalGamesLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gamesGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gamesListResponseBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -87,38 +89,6 @@ namespace SteamTracker
             this.gamesGrid.Size = new System.Drawing.Size(1430, 505);
             this.gamesGrid.TabIndex = 1;
             this.gamesGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gamesGrid_CellEndEdit);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(862, 12);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(88, 42);
-            this.saveButton.TabIndex = 2;
-            this.saveButton.Text = "Save Data";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(299, 57);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
-            this.searchButton.TabIndex = 3;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
-            // searchTextBox
-            // 
-            this.searchTextBox.Location = new System.Drawing.Point(12, 60);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(281, 20);
-            this.searchTextBox.TabIndex = 4;
-            this.searchTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchTextBox_KeyPress);
-            // 
-            // gamesListResponseBindingSource
-            // 
-            this.gamesListResponseBindingSource.DataSource = typeof(SteamTracker.dtos.GamesListResponse);
             // 
             // appid
             // 
@@ -187,6 +157,55 @@ namespace SteamTracker
             this.storePageLink.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.storePageLink.Width = 200;
             // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(299, 57);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 3;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Location = new System.Drawing.Point(12, 60);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(281, 20);
+            this.searchTextBox.TabIndex = 4;
+            this.searchTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchTextBox_KeyPress);
+            // 
+            // addNonSteamGame
+            // 
+            this.addNonSteamGame.Location = new System.Drawing.Point(110, 12);
+            this.addNonSteamGame.Name = "addNonSteamGame";
+            this.addNonSteamGame.Size = new System.Drawing.Size(119, 42);
+            this.addNonSteamGame.TabIndex = 5;
+            this.addNonSteamGame.Text = "Add non-steam game";
+            this.addNonSteamGame.UseVisualStyleBackColor = true;
+            this.addNonSteamGame.Click += new System.EventHandler(this.addNonSteamGame_Click);
+            // 
+            // gamesListResponseBindingSource
+            // 
+            this.gamesListResponseBindingSource.DataSource = typeof(SteamTracker.dtos.GamesListResponse);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(236, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Total games in library: ";
+            // 
+            // totalGamesLabel
+            // 
+            this.totalGamesLabel.AutoSize = true;
+            this.totalGamesLabel.Location = new System.Drawing.Point(355, 23);
+            this.totalGamesLabel.Name = "totalGamesLabel";
+            this.totalGamesLabel.Size = new System.Drawing.Size(0, 13);
+            this.totalGamesLabel.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,14 +213,15 @@ namespace SteamTracker
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1454, 603);
+            this.Controls.Add(this.totalGamesLabel);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.addNonSteamGame);
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.searchButton);
-            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.gamesGrid);
             this.Controls.Add(this.buttonRefresh);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gamesGrid)).EndInit();
@@ -216,7 +236,6 @@ namespace SteamTracker
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.DataGridView gamesGrid;
         private System.Windows.Forms.BindingSource gamesListResponseBindingSource;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn appid;
@@ -226,6 +245,9 @@ namespace SteamTracker
         private System.Windows.Forms.DataGridViewTextBoxColumn notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn latestUpdated;
         private System.Windows.Forms.DataGridViewTextBoxColumn storePageLink;
+        private System.Windows.Forms.Button addNonSteamGame;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label totalGamesLabel;
     }
 }
 

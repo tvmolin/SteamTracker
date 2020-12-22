@@ -26,5 +26,10 @@ namespace SteamTracker.dtos
 
         [JsonProperty("storePageLink")]
         public string storePageLink { get; set; }
+
+        public Game(string name)
+        {
+            this.name = name;
+        }
     }
 }
